@@ -8,8 +8,5 @@
   "exclude": [
     "test.ts",
     "**/*.spec.ts"
-  ],
-  "paths": {
-    "@app/*": "src/app"
-  }
+  ]
 }

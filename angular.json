@@ -64,7 +64,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "hmrWarning": false,
           "options": {
             "browserTarget": "product-manager:build"
           },
@@ -73,6 +72,7 @@
               "browserTarget": "product-manager:build:production"
             },
             "hmr": {
+              "hmrWarning": false,
               "hmr": true,
               "browserTarget": "product-manager:build:hmr"
             }
