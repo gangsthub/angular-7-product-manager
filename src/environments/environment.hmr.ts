@@ -2,9 +2,10 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/configure-hmr.md
 export const environment = {
   production: false,
-  hmr: false
+  hmr: true
 };
 
 /*
