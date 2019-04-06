@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+
+
+// Include non-theme styles for core.
+@include mat-core();
+
+// Define a theme.
+$primary: mat-palette($mat-pink, 700, 500, 900);
+$accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+
+$theme: mat-dark-theme($primary, $accent);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
+
+
+$COLORS: (
+  ('mat-primary', mat-color($primary), false),
+  ('mat-accent', mat-color($accent, 700), false),
+  ('white', #FFF, true),
+);
+
+@mixin addRoot($condition) {
+  @if $condition {
+    :root {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@each $color-name, $color-value, $needs-root in $COLORS {
+  @include addRoot($needs-root) {
+    .#{$color-name} {
+      &--bg {
+        background-color: $color-value;
+      }
+      &--text {
+        color: $color-value;
+        &.hover-darker:hover {
+          color: darken($color-value, 20)
+        }
+        &.hover-lighter:hover {
+          color: lighten($color-value, 20)
+        }
+      }
+    }
+  }
+}

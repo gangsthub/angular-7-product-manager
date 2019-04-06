@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: '@app/home/home.module#HomeModule'
+  },
+  {
+    path: 'favourites',
+    loadChildren: '@app/favourites/favourites.module#FavouritesModule'
   }
 ];
 
