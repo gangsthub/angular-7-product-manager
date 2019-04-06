@@ -1,4 +1,8 @@
 
+body {
+  color: $brand-black;
+}
+
 a:focus,
 a:active {
   @include focused-ring;

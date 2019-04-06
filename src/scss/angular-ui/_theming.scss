@@ -5,45 +5,37 @@
 @include mat-core();
 
 // Define a theme.
-$primary: mat-palette($mat-pink, 700, 500, 900);
-$accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+$primary: mat-palette($mat-teal, 600);
+$accent:  mat-palette($mat-grey, 300);
 
-$theme: mat-dark-theme($primary, $accent);
+$theme: mat-light-theme($primary, $accent);
 
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
 
+// Custom colors (appart from theme)
+$brand-white: hsl(0, 0%, 95%);
+$brand-black: hsl(0, 0%, 5%);
 
 $COLORS: (
-  ('mat-primary', mat-color($primary), true),
-  ('mat-accent', mat-color($accent, 700), true),
-  ('white', #FFF, true),
+  'mat-primary': mat-color($primary),
+  'mat-accent': mat-color($accent),
+  'white': $brand-white,
+  'black': $brand-black,
 );
 
-@mixin addRoot($condition) {
-  @if $condition {
-    :root {
-      @content;
+@each $color-name, $color-value in $COLORS {
+  :root .#{$color-name} {
+    &--bg {
+      background-color: $color-value;
     }
-  } @else {
-    @content;
-  }
-}
-
-@each $color-name, $color-value, $needs-root in $COLORS {
-  @include addRoot($needs-root) {
-    .#{$color-name} {
-      &--bg {
-        background-color: $color-value;
+    &--text {
+      color: $color-value;
+      &.hover-darker:hover {
+        color: darken($color-value, 20)
       }
-      &--text {
-        color: $color-value;
-        &.hover-darker:hover {
-          color: darken($color-value, 20)
-        }
-        &.hover-lighter:hover {
-          color: lighten($color-value, 20)
-        }
+      &.hover-lighter:hover {
+        color: lighten($color-value, 20)
       }
     }
   }

@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProductItemComponent } from './product-item/product-item.component';
-import { ProductListComponent } from './product-list/product-list.component';
 import { MaterialModule } from '@app/modules/material/material.module';
 
+import { ProductItemComponent } from './product-item/product-item.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { FiltersToolbarComponent } from './filters-toolbar/filters-toolbar.component';
+
 @NgModule({
-  declarations: [ProductItemComponent, ProductListComponent],
+  declarations: [
+    ProductItemComponent,
+    ProductListComponent,
+    FiltersToolbarComponent
+  ],
   imports: [CommonModule, MaterialModule],
-  exports: [ProductItemComponent, ProductListComponent]
+  exports: [ProductItemComponent, ProductListComponent, FiltersToolbarComponent]
 })
 export class SharedModule {}
