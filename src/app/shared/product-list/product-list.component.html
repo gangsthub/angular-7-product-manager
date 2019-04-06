@@ -1,3 +1,3 @@
-<mat-card>
-  asdf
+<mat-card class="product-list">
+  <app-product-item *ngFor="let item of products" [product]="item"></app-product-item>
 </mat-card>

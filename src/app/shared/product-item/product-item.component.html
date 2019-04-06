@@ -1,3 +1,20 @@
-<p>
-  product-item works!
-</p>
+<mat-card class="product-item">
+  <img *ngIf="product.image" mat-card-image [src]="'assets/images/' + product.image">
+  <mat-card-content>
+    <h2>
+      {{ product.title }}
+    </h2>
+    <p>
+      {{ product.description }}
+    </p>
+    <p>
+      {{ product.price }}
+    </p>
+    <p>
+      {{ product.email }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-fab>FAV</button>
+  </mat-card-actions>
+</mat-card>
