@@ -27,23 +27,38 @@
   }
 }
 
-:root {
+@mixin generateGuttersClasses($preffix) {
+  // examples: pb-3, md:ma-auto
+  $conditionalPreffix: if($preffix != null, $preffix + '\\:', '');
   @each $key, $value in $GUTTERS {
-    @include placeholderAndClass('ma', $key, margin, $value);
-    @include placeholderAndClass('pa', $key, padding, $value);
+    @include placeholderAndClass('#{ $conditionalPreffix }ma', $key, margin, $value);
+    @include placeholderAndClass('#{ $conditionalPreffix }pa', $key, padding, $value);
 
     @each $axis in $AXES { // is a 2 level map. x|y -> top, bottom, left, right (with shorthands mapped)
 
       $xOrY: nth($axis, 1);
       $directionPairList: nth($axis, 2);
 
-      @include placeholderAndClass('m#{ $xOrY }', $key, margin, $value, $directionPairList);
-      @include placeholderAndClass('p#{ $xOrY }', $key, padding, $value, $directionPairList);
+      @include placeholderAndClass('#{ $conditionalPreffix }m#{ $xOrY }', $key, margin, $value, $directionPairList);
+      @include placeholderAndClass('#{ $conditionalPreffix }p#{ $xOrY }', $key, padding, $value, $directionPairList);
 
       @each $cardinal, $shorthand in $directionPairList { // every box edge separatedly
-        @include placeholderAndClass('m#{ $shorthand }', $key, 'margin-#{ $cardinal }', $value);
-        @include placeholderAndClass('p#{ $shorthand }', $key, 'padding-#{ $cardinal }', $value);
+        @include placeholderAndClass('#{ $conditionalPreffix }m#{ $shorthand }', $key, 'margin-#{ $cardinal }', $value);
+        @include placeholderAndClass('#{ $conditionalPreffix }p#{ $shorthand }', $key, 'padding-#{ $cardinal }', $value);
       }
+    }
+  }
+}
+// with no @media queries
+:root {
+  @include generateGuttersClasses(null);
+}
+
+// with media queries
+@each $mediaName, $mediaValue in $WINDOW-DIMENSIONS {
+  @media #{ $mediaValue } {
+    :root {
+      @include generateGuttersClasses($mediaName);
     }
   }
 }

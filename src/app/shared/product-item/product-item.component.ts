@@ -24,6 +24,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   onFavourite(id: number) {
+    // saved on the service's cached copy
     const hasBeenAdded = this.productsService.treatEmmitedFav(id);
     this.activatedColor = colorsMap.get(!!hasBeenAdded);
   }

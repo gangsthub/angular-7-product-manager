@@ -48,9 +48,10 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnChanges({ orderBy }: { orderBy: SimpleChange }) {
-    const orderByCurrentValue = orderBy.currentValue;
-    if (orderByCurrentValue) {
-      this.changeOrder(orderByCurrentValue);
+    if (orderBy.currentValue) {
+      this.changeOrder(orderBy.currentValue);
+    } else if (!orderBy.currentValue && orderBy.previousValue) {
+      this.resetOrder();
     }
   }
 
@@ -62,11 +63,9 @@ export class ProductListComponent implements OnInit {
       case 'title':
       case 'description':
       case 'email':
-        this.displayedProducts = [];
         this.displayedProducts = this.sortCollectionByStringProp(type);
         break;
       case 'price':
-        this.displayedProducts = [];
         this.displayedProducts = this.sortCollectionByNumberProp('price');
         break;
 
@@ -93,5 +92,9 @@ export class ProductListComponent implements OnInit {
       return Number(prev[numberProp]) - Number(next[numberProp]);
     });
     return productsCopy;
+  }
+
+  private resetOrder() {
+    this.displayedProducts = [...this.products];
   }
 }
