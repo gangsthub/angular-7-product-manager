@@ -5,4 +5,5 @@ export interface Product {
   price: string;
   email: string;
   image: string;
+  favourited?: boolean;
 }

@@ -1,26 +1,24 @@
-<mat-card>
+<mat-card class="relative">
   <img
     *ngIf="product.image"
     mat-card-image
     [src]="'assets/images/' + product.image"
   />
   <mat-card-content>
-    <h2>
-      {{ product.title }}
+    <h2 class="flex flex-justify-between">
+      <span>{{ product.title }}</span>
+      <app-price [price]="product.price" class="mat-primary--text"></app-price>
     </h2>
     <p>
       {{ product.description }}
     </p>
     <p>
-      {{ product.price }}
-    </p>
-    <p>
-      {{ product.email }}
+      <a [href]="'mailto:' + product.email">{{ product.email }}</a>
     </p>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions class="absolute button-floating">
     <button
-      mat-icon-button
+      mat-mini-fab
       [color]="activatedColor"
       (click)="onFavourite(product.id)"
     >

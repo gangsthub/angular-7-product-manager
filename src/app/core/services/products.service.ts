@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Product } from '@app/shared/models/Product.model';
-import ProductsMock from '../mocks/products.mock';
+import productsMock from '../mocks/products.mock';
 import { FavouritedList } from '@app/shared/models/FavouritedList.model';
 
 @Injectable({
@@ -16,7 +16,16 @@ export class ProductsService {
   > = new EventEmitter();
 
   public getProducts(): Product[] {
-    return ProductsMock;
+    return productsMock.reduce((accumulated: Product[], product: Product) => {
+      return [
+        ...accumulated,
+        ...[
+          this.favouritedProducts.indexOf(product.id) > -1
+            ? { ...product, favourited: true }
+            : { ...product }
+        ]
+      ];
+    }, []);
   }
 
   /**
