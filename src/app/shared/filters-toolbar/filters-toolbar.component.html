@@ -1,18 +1,32 @@
 <mat-card class="transparent mb-4 mat-elevation-z4">
-  <mat-card-content class="text-right">
-    <mat-icon class="ibm mr-3">filter_list</mat-icon>
-    <mat-form-field appearance="fill" class="xl:w30p w50p ibm">
-      <mat-label>Order by:</mat-label>
-      <mat-select (selectionChange)="emitChange($event)">
-        <mat-option>None</mat-option>
-        <mat-option
-          *ngFor="let orderOption of orderOptions"
-          class="text-capitalize"
-          [value]="orderOption.type"
-        >
-          <span>{{ orderOption.display }}</span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-card-content class="flex flex-justify-between flex-align-center">
+    <span class="xl:w30p w50p">
+      <mat-form-field appearance="fill" class="ibm w100p">
+        <mat-icon matPrefix class="ibm mr-3">search</mat-icon>
+        <mat-label>Search</mat-label>
+        <input
+          type="search"
+          matInput
+          placeholder="Search..."
+          (input)="onSearchChange($event.target.value)"
+        />
+      </mat-form-field>
+    </span>
+    <span class="xl:w30p w50p">
+      <mat-form-field appearance="fill" class="ibm w100p">
+        <mat-icon matPrefix class="ibm mr-3">filter_list</mat-icon>
+        <mat-label>Order by:</mat-label>
+        <mat-select (selectionChange)="emitChange($event)">
+          <mat-option>None</mat-option>
+          <mat-option
+            *ngFor="let orderOption of orderOptions"
+            class="text-capitalize"
+            [value]="orderOption.type"
+          >
+            <span>{{ orderOption.display }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </span>
   </mat-card-content>
 </mat-card>

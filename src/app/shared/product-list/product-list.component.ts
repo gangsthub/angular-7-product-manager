@@ -37,14 +37,19 @@ import { OrderOptionsType } from '../models/OrderOptions.model';
 export class ProductListComponent implements OnInit {
   @Input() products: Product[] = [];
   @Input() orderBy: OrderOptionsType;
+  @Input() searchParam: string;
 
+  // will always be a shallow copy from original cached products (on client side)
   displayedProducts: Product[] = [];
 
   constructor() {}
 
   ngOnInit() {
-    // shallow copy
-    this.displayedProducts = [...this.products];
+    if (this.orderBy) {
+      this.changeOrder(this.orderBy);
+    } else {
+      this.displayedProducts = [...this.products];
+    }
   }
 
   ngOnChanges({ orderBy }: { orderBy: SimpleChange }) {
@@ -68,7 +73,6 @@ export class ProductListComponent implements OnInit {
       case 'price':
         this.displayedProducts = this.sortCollectionByNumberProp('price');
         break;
-
       default:
         break;
     }
@@ -84,7 +88,7 @@ export class ProductListComponent implements OnInit {
     return productsCopy;
   }
 
-  private sortCollectionByNumberProp(numberProp): Product[] {
+  private sortCollectionByNumberProp(numberProp: keyof Product): Product[] {
     const productsCopy = [...this.products].sort((prev, next) => {
       if (isNaN(Number(prev[numberProp]))) {
         return;

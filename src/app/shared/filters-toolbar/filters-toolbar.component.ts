@@ -1,6 +1,15 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy
+} from '@angular/core';
 
 import { MatSelectChange } from '@angular/material/select';
+
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import {
   OrderOptionsType,
@@ -12,7 +21,7 @@ import {
   templateUrl: './filters-toolbar.component.html',
   styleUrls: ['./filters-toolbar.component.css']
 })
-export class FiltersToolbarComponent implements OnInit {
+export class FiltersToolbarComponent implements OnInit, OnDestroy {
   orderOptions: OrderOptionsModel[] = [
     { type: 'title', display: 'Title' },
     { type: 'description', display: 'Description' },
@@ -21,13 +30,34 @@ export class FiltersToolbarComponent implements OnInit {
   ];
 
   @Output() orderChange: EventEmitter<OrderOptionsType> = new EventEmitter();
+  @Output() searchChange: EventEmitter<string> = new EventEmitter();
+
+  private searchValue = new Subject();
+  private searchSubscription: Subscription;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initSearchSubscription();
+  }
 
-  emitChange($event: MatSelectChange) {
-    // console.log($event.value);
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
+  }
+
+  onSearchChange(value: string) {
+    this.searchValue.next(value);
+  }
+
+  private initSearchSubscription() {
+    this.searchSubscription = this.searchValue
+      .pipe(debounceTime(400))
+      .subscribe((value: string) => {
+        this.searchChange.emit(value);
+      });
+  }
+
+  emitSortingChange($event: MatSelectChange) {
     this.orderChange.emit($event.value);
   }
 }

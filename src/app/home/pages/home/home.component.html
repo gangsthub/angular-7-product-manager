@@ -2,8 +2,10 @@
   <h1>Products</h1>
   <app-filters-toolbar
     (orderChange)="orderSelected = $event"
+    (searchChange)="searchParam = $event"
   ></app-filters-toolbar>
   <app-product-list
+    *ngIf="searchParam"
     [products]="products"
     [orderBy]="orderSelected"
   ></app-product-list>

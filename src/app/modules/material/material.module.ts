@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatInputModule } from '@angular/material/input';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -16,7 +17,8 @@ const MATERIAL_MODULES = [
   MatListModule,
   MatSliderModule,
   MatSelectModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatInputModule
 ];
 
 @NgModule({
