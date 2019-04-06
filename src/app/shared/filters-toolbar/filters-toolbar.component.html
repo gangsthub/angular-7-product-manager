@@ -1,5 +1,17 @@
-<mat-card class="transparent">
-  <mat-card-content>
-    asdfadsf
+<mat-card class="transparent mb-4 mat-elevation-z4">
+  <mat-card-content class="text-right">
+    <mat-icon class="ibm mr-3">filter_list</mat-icon>
+    <mat-form-field appearance="fill" class="xl:w30p w50p ibm">
+      <mat-label>Order by:</mat-label>
+      <mat-select (selectionChange)="emitChange($event)">
+        <mat-option
+          *ngFor="let orderOption of orderOptions"
+          class="text-capitalize"
+          [value]="orderOption.type"
+        >
+          <span>{{ orderOption.display }}</span>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </mat-card-content>
 </mat-card>
