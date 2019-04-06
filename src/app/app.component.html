@@ -1,4 +1,9 @@
 <div>
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <div class="flex">
+    <app-sidebar></app-sidebar>
+    <main class="container">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

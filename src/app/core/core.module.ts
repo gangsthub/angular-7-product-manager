@@ -5,11 +5,12 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@app/modules/material/material.module';
 
 import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, MaterialModule],
-  declarations: [HeaderComponent],
-  exports: [HeaderComponent],
+  declarations: [HeaderComponent, SidebarComponent],
+  exports: [HeaderComponent, SidebarComponent],
   providers: []
 })
 export class CoreModule {

@@ -1,5 +1,5 @@
 @each $key, $value in $MAX-HEIGHTS {
-  .max-h { // examples: max-h8vh
+  .max-h { // examples: max-h10vh
     &#{$value} {
       max-height: $value;
     }

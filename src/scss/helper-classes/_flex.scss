@@ -10,6 +10,9 @@
     &.row {
       flex-direction: row;
     }
+    &.wrap {
+      flex-wrap: wrap;
+    }
   }
 }
 

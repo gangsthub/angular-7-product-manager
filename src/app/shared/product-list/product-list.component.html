@@ -1,3 +1,4 @@
-<mat-card class="product-list">
-  <app-product-item *ngFor="let item of products" [product]="item"></app-product-item>
+<mat-card class="product-list flex wrap justify-content-center">
+  <app-product-item *ngFor="let item of products" [product]="item"
+  class="product-item xl:max-w30p md:max-w50p ma-auto"></app-product-item>
 </mat-card>
