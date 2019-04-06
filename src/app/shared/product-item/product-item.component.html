@@ -1,5 +1,9 @@
 <mat-card>
-  <img *ngIf="product.image" mat-card-image [src]="'assets/images/' + product.image">
+  <img
+    *ngIf="product.image"
+    mat-card-image
+    [src]="'assets/images/' + product.image"
+  />
   <mat-card-content>
     <h2>
       {{ product.title }}

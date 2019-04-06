@@ -2,9 +2,9 @@ body {
   margin: 0
 }
 
-html,
-body {
-  height: 100%;
+*,
+*:after,
+*:before {
   box-sizing: border-box;
 }
 
@@ -12,4 +12,18 @@ body {
   margin: 0;
   font-family: $default-font-family;
   text-rendering: optimizeSpeed;
+}
+
+app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  > * {
+    height: 100%;
+  }
+}
+
+.container {
+  width: 100%;
+  padding: map-get($GUTTERS, 4);
 }

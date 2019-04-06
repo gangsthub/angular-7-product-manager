@@ -1,0 +1,7 @@
+:root .mat-list-item-active { // new class
+  &,
+  &:active,
+  &:focus {
+    background: rgba(black, .08);
+  }
+}

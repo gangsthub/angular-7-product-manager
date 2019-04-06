@@ -15,8 +15,8 @@ $theme: mat-dark-theme($primary, $accent);
 
 
 $COLORS: (
-  ('mat-primary', mat-color($primary), false),
-  ('mat-accent', mat-color($accent, 700), false),
+  ('mat-primary', mat-color($primary), true),
+  ('mat-accent', mat-color($accent, 700), true),
   ('white', #FFF, true),
 );
 
