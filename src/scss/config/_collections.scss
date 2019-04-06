@@ -1,0 +1,101 @@
+// collections
+
+$CURSORS: (
+    pointer: p,
+    // help: h,
+    // text: t,
+    // grab: g,
+    // grabbing: g,
+    auto: a,
+    // all-scroll: as,
+    // row-resize: rr,
+    n-resize: nr,
+    // wait: w,
+);
+
+$AXES: (
+    y: (
+        top: t,
+        bottom: b,
+    ),
+    x: (
+        right: r,
+        left: l
+    )
+);
+
+
+$TEXT-DIRECTIONS: (
+    left,
+    center,
+    right,
+);
+
+
+$TEXT-WEIGHTS: (
+    thin: 100,
+    light: 200,
+    normal: 400,
+    bold: 600,
+    extra-bold: 800,
+);
+
+$FONT-STYLES: (
+    italic,
+    normal
+);
+
+$FLEX-DIRECTIONS: (
+    end: flex-end,
+    start: flex-start,
+    center: center,
+    between: space-between,
+    around: space-around,
+    stretch: stretch
+);
+
+$CONTAINER-WIDTHS: (
+    5,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    95,
+    100
+);
+
+$WINDOW-DIMENSIONS: (
+    // if 14px,
+    // 1/14=0.071429
+    // 100 - 1/14=99.928571
+    xl: '(min-width: 100em)',
+    md: '(min-width: 73.071429em) and (max-width: 99.928571em)', // 14*73=1022
+    sm: '(min-width: 64.071429em) and (max-width: 73em)', // 14*64=896
+    xs: '(max-width: 64em)',
+);
+
+$MAX-HEIGHTS: (
+    cell: 10vh,
+);
+
+$GUTTERS: (
+    auto: auto,
+    1: 2px,
+    2: 4px,
+    3: 8px,
+    4: 16px,
+    5: 32px,
+    6: 64px,
+    0: 0,
+);
+
+$Z-INDEXES: (
+    0,
+    1,
+    2,
+);

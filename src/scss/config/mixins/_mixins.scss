@@ -1,0 +1,105 @@
+// behav
+
+@mixin transition($props...) {
+  // combines Variable argument lists
+  // http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_arguments
+  // and transition property lists:
+  // https://www.w3.org/TR/css3-transitions/#transitions
+  transition: $props $transition-default-props;
+}
+
+@mixin A0($important: false) {
+  @if $important {
+    :root & {
+      position: absolute;
+    }
+  } @else {
+    position: absolute;
+  }
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin non-selectable {
+  user-select: none;
+}
+
+@mixin non-interactuable($pointer-events: true) {
+  @if $pointer-events {
+    pointer-events: none;
+  } @else {
+    cursor: not-allowed;
+  }
+  @include non-selectable;
+}
+
+// texts
+
+@mixin focused-ring {
+  // https://www.tjvantoll.com/2013/01/28/stop-messing-with-the-browsers-default-focus-outline/
+  outline: #5B9DD9 auto 5px; // rgba(175, 140, 76, .5)
+}
+
+@mixin clamping($lines: 1, $padding: 0/* must be ems! */, $lineHeigth: 1.2, $w: false) {
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  @supports not (-webkit-line-clamp: 1) {
+    $_height: 0;
+
+    @if (comparable($padding, 1)) {
+      $_height: $lineHeigth * $lines + $padding;
+    } @else {
+      $_height: $lineHeigth * $lines;
+      @warn 'Padding #{ $padding } should be in ems but not have the units!'
+    }
+
+    height: #{$_height}em;
+    white-space: nowrap;
+    word-wrap: normal;
+
+    @if $w {
+      max-width: #{$w};
+    }
+  }
+  @supports (-webkit-line-clamp: 1) {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+  }
+  // IE does not support `@supports`
+}
+
+// visibility
+
+@mixin translucency($disabled: false) {
+  opacity: .6;
+  @if $disabled {
+    @include non-interactuable;
+  }
+}
+
+@mixin fade-out($direction: left, $bg-color: white, $length: 2em) {
+  @include A0;
+  #{ $direction }: auto;
+  width: $length;
+  background: linear-gradient(to $direction, $bg-color, transparent);
+}
+
+// typography
+
+@mixin default-typography {
+  font-family: mat-font-family($custom-typography);
+  // @include mat-base-typography($custom-typography);
+}
+
+// hacks
+
+@mixin is-firefox {
+  @supports (-moz-appearance: meterbar) {
+    @content;
+  }
+}

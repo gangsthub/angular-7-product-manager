@@ -1,0 +1,90 @@
+
+// helper classes for texts
+
+// cursors
+// example: `c-p` == cursor-pointer
+@each $name, $shorthand in $CURSORS {
+  .c-#{$shorthand}{
+      cursor: #{$name} !important;
+  }
+}
+
+.fsz-small {
+  font-size: $small-font-size !important;
+}
+
+.fsz-label {
+  font-size: $label-font-size !important;
+}
+
+.pre-line {
+  white-space: pre-line;
+}
+
+@each $direction in $TEXT-DIRECTIONS {
+  .text-#{$direction} { // Examples: .text-right, .text-left, .text-center
+      text-align: $direction;
+  }
+}
+
+@each $wheght-name, $wheight in $TEXT-WEIGHTS {
+  .text-#{$wheght-name} { // Examples: .text-bold, .text-light, text-normal
+    font-weight: $wheight;
+  }
+}
+
+@each $style in $FONT-STYLES {
+  .font-#{$style} { // Examples: .text-italic, text-normal
+    font-style: $style;
+  }
+}
+
+.default-font {
+  font-family: $default-font-family;
+}
+
+.default-line-height {
+  line-height: $default-font-size * 1.6; // 1.6*14=22.4
+}
+
+.dense-line-height {
+  line-height: 1.2;
+}
+
+:root:root .default-font-size {
+  font-size: $default-font-size;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.one-line {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  &--block { // .one-line--block
+    display: block;
+  }
+  &--faded { // .one-line--shaded
+    position: relative;
+    &:after {
+      content: '';
+      @include fade-out($length: 5em);
+    }
+  }
+}
+
+.break-long-words {
+  word-break: break-word;
+}
+
+.list-style-none {
+  list-style: none;
+}

@@ -1,0 +1,49 @@
+
+// margins and paddings
+// Examples: m-0, pa-3, my-4, pr-1, ma-auto, px-0
+// They follow this pattern: `{ property shorthand }{ direction shorthand }-{ unitless value }`
+// if we see that placeholders (extends) are not cool because of cascade altering, we
+// will switch to mixins, rewriting the next mixin in the future
+
+// TODO, improve readability
+
+@mixin placeholderAndClass($name, $key, $prop, $value, $map: false) {
+  $symbols: ('%', '.');
+
+  @if type-of($map) == map {
+    @each $symbol in $symbols {
+      #{ $symbol }#{ $name }-#{ $key } {
+        @each $direction in $map { // top and bottom, or left and right together
+          #{ $prop }-#{ nth($direction, 1)}: $value;
+        }
+      }
+    }
+  } @else {
+    @each $symbol in $symbols {
+      #{ $symbol }#{ $name }-#{ $key } {
+        #{ $prop }: $value;
+      }
+    }
+  }
+}
+
+:root {
+  @each $key, $value in $GUTTERS {
+    @include placeholderAndClass('ma', $key, margin, $value);
+    @include placeholderAndClass('pa', $key, padding, $value);
+
+    @each $axis in $AXES { // is a 2 level map. x|y -> top, bottom, left, right (with shorthands mapped)
+
+      $xOrY: nth($axis, 1);
+      $directionPairList: nth($axis, 2);
+
+      @include placeholderAndClass('m#{ $xOrY }', $key, margin, $value, $directionPairList);
+      @include placeholderAndClass('p#{ $xOrY }', $key, padding, $value, $directionPairList);
+
+      @each $cardinal, $shorthand in $directionPairList { // every box edge separatedly
+        @include placeholderAndClass('m#{ $shorthand }', $key, 'margin-#{ $cardinal }', $value);
+        @include placeholderAndClass('p#{ $shorthand }', $key, 'padding-#{ $cardinal }', $value);
+      }
+    }
+  }
+}

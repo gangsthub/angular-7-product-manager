@@ -1,0 +1,37 @@
+
+// visibility
+:root {
+  .o {
+    &h { // .oh
+      overflow: hidden;
+    }
+    &v { // .ov
+      overflow: visible;
+    }
+    &x-auto { // ox-auto
+      overflow-x: auto;
+    }
+    &y-auto { // oy-auto
+      overflow-y: auto;
+    }
+    &y-h { // oy-h
+      overflow-y: hidden;
+    }
+  }
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.translucent {
+  @include translucency;
+}
+
+.disabled {
+  @include translucency('disabled');
+}
+
+.hidden {
+  visibility: hidden;
+}

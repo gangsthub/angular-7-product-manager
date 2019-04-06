@@ -1,0 +1,34 @@
+@mixin generateCols($preffix) {
+  // examples: xl:min-w50p, md:w100p
+  $conditionalPreffix: if($preffix != null, $preffix + '\\:', '');
+
+  @each $width in $CONTAINER-WIDTHS {
+    .#{ $conditionalPreffix }min-w#{ $width }p { // example: min-w50p, min-w100p, min-w40p...
+      min-width: $width + 0%;
+    }
+    .#{ $conditionalPreffix }max-w#{ $width }p { // example: max-w50p, max-w100p, max-w40p...
+      max-width: $width + 0%;
+    }
+    .#{ $conditionalPreffix }w#{ $width }p { // example: w50p, w100p, w40p...
+      width: $width + 0%;
+    }
+    .#{ $conditionalPreffix }push#{ $width }p { // example: push50p, push100p, push40p...
+      margin-left: $width + 0%;
+    }
+    .#{ $conditionalPreffix }pull#{ $width }p { // example: pull50p, pull100p, pull40p...
+      margin-left: $width + 0%;
+    }
+  }
+}
+// with no @media queries
+:root {
+  @include generateCols(null);
+}
+// with media queries
+@each $mediaName, $mediaValue in $WINDOW-DIMENSIONS {
+  @media #{ $mediaValue } {
+    :root {
+      @include generateCols($mediaName);
+    }
+  }
+}

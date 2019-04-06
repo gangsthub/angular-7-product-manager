@@ -1,0 +1,14 @@
+
+.non-selectable {
+  @include non-selectable;
+}
+
+.non-interactuable {
+  @include non-interactuable;
+}
+
+.non-interactuable[class*="button"] {
+  pointer-events: all; // to allow hover and right-click (control the click yourself)
+  @include non-interactuable(false);
+  background-color: map-get($mat-light-theme-foreground, 'disabled-button');
+}

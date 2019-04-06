@@ -1,0 +1,14 @@
+
+// transitions
+$transition-duration: .3s;
+$transition-function: cubic-bezier(.25, .8, .5, 1);
+$transition-default-props: $transition-duration $transition-function;
+
+// typography
+$default-font-family: Roboto, "Helvetica Neue", sans-serif;
+$default-font-size: 14px;
+$small-font-size: 12px;
+$label-font-size: 18px;
+
+// forms
+$input-horizontal-padding: 7px;

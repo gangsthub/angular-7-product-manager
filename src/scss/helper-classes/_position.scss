@@ -1,0 +1,32 @@
+
+.prel.prel {
+  position: relative;
+}
+
+.pabs.pabs {
+  position: absolute;
+}
+
+.A0 {
+  @include A0(true);
+}
+
+.db.db {
+  display: block;
+}
+
+.ibm {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@each $depth in $Z-INDEXES {
+  .z-#{$depth} {
+    z-index: $depth;
+  }
+}
+
+.upside-down {
+  transform: scaleY(-1);
+  filter: FlipY;
+}

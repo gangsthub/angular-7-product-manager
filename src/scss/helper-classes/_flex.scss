@@ -1,0 +1,67 @@
+
+// flex helpers
+
+:root:root {
+  .flex {
+    display: flex;
+    &.column {
+      flex-direction: column;
+    }
+    &.row {
+      flex-direction: row;
+    }
+  }
+}
+
+@each $shorthand, $direction in $FLEX-DIRECTIONS {
+  .flex-justify-#{$shorthand} {
+    &,
+    .mat-figure {
+      @at-root :root & {
+        justify-content: $direction;
+      }
+    }
+  }
+  .flex-align-#{$shorthand} {
+    &,
+    .mat-figure {
+      @at-root :root & {
+        align-items: $direction;
+      }
+    }
+  }
+  .flex-align-self-#{$shorthand} {
+    @at-root :root & {
+      align-self: $direction;
+    }
+  }
+}
+
+:root {
+  .flex-1-1-auto {
+    flex: 1 1 auto;
+  }
+  .flex-1-0-auto {
+    flex: 1 0 auto;
+  }
+  .flex-0-0-auto {
+    flex: 0 0 auto;
+  }
+  .flex-0-1-auto {
+    flex: 0 1 auto;
+  }
+}
+
+.h100p {
+  height: 100%;
+}
+
+:root .hauto {
+  height: auto;
+}
+
+.fill-remaining-space {
+  // This fills the remaining space, by using flexbox.
+  // Every toolbar row uses a flexbox row layout.
+  @extend %ma-auto;
+}
