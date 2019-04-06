@@ -9,6 +9,7 @@ import { FavouritedList } from '@app/shared/models/FavouritedList.model';
 export class ProductsService {
   constructor() {}
 
+  // storing their "ids" (property added to mocked collection)
   favouritedProducts: FavouritedList = [];
 
   @Output() favouritedProductsEmmiter: EventEmitter<

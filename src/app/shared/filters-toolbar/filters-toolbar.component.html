@@ -4,6 +4,7 @@
     <mat-form-field appearance="fill" class="xl:w30p w50p ibm">
       <mat-label>Order by:</mat-label>
       <mat-select (selectionChange)="emitChange($event)">
+        <mat-option>None</mat-option>
         <mat-option
           *ngFor="let orderOption of orderOptions"
           class="text-capitalize"

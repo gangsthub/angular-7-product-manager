@@ -1,5 +1,10 @@
 <div>
   <h1>Products</h1>
-  <app-filters-toolbar></app-filters-toolbar>
-  <app-product-list [products]="products"></app-product-list>
+  <app-filters-toolbar
+    (orderChange)="orderSelected = $event"
+  ></app-filters-toolbar>
+  <app-product-list
+    [products]="products"
+    [orderBy]="orderSelected"
+  ></app-product-list>
 </div>

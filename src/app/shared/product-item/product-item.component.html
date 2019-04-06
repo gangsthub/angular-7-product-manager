@@ -12,10 +12,13 @@
     <p>
       {{ product.description }}
     </p>
-    <p>
-      <a [href]="'mailto:' + product.email">{{ product.email }}</a>
-    </p>
   </mat-card-content>
+  <mat-card-actions>
+    <a mat-button [href]="'mailto:' + product.email"
+      ><mat-icon color="primary" class="ibm mr-2">email</mat-icon
+      ><span class="ibm">{{ product.email }}</span></a
+    >
+  </mat-card-actions>
   <mat-card-actions class="absolute button-floating">
     <button
       mat-mini-fab
