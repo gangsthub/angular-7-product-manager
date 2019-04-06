@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-
-const products = () => import('../mocks/products.mock');
+import { Product } from '@app/shared/models/Product.model';
+import ProductsMock from '../mocks/products.mock';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ const products = () => import('../mocks/products.mock');
 export class ProductsService {
   constructor() {}
 
-  public async getProducts() {
-    return await products();
+  public getProducts(): Product[] {
+    return ProductsMock;
   }
 }

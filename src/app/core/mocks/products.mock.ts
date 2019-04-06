@@ -1,4 +1,6 @@
-export default [
+import { Product } from '@app/shared/models/Product.model';
+
+const ProductMock: Product[] = [
   {
     title: 'iPhone 6S Oro',
     description:
@@ -240,3 +242,5 @@ export default [
     image: 'car.png'
   }
 ];
+
+export default ProductMock;
