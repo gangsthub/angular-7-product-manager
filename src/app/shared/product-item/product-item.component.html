@@ -19,6 +19,12 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-fab>FAV</button>
+    <button
+      mat-icon-button
+      [color]="activatedColor"
+      (click)="onFavourite(product.id)"
+    >
+      <mat-icon aria-label="Save or delete favourite">favorite</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>

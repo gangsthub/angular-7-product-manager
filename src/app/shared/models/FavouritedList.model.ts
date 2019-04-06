@@ -1,0 +1,1 @@
+export type FavouritedList = number[];

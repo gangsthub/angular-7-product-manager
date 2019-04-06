@@ -11,6 +11,13 @@
     routerLinkActive="mat-list-item-active"
     class="db mat-primary--text text-decoration-none hover-darker mat-title"
     [routerLink]="['/favourites']"
-    >Favourites</a
   >
+    <span
+      [matBadge]="favouritesCount"
+      [matBadgeHidden]="favouritesCount < 1"
+      [matBadgeOverlap]="false"
+      matBadgeColor="primary"
+      >Favourites</span
+    >
+  </a>
 </mat-nav-list>

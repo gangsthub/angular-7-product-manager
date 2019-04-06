@@ -7,8 +7,9 @@
 // Define a theme.
 $primary: mat-palette($mat-teal, 600);
 $accent:  mat-palette($mat-grey, 300);
+$warn:    mat-palette($mat-red);
 
-$theme: mat-light-theme($primary, $accent);
+$theme:   mat-light-theme($primary, $accent);
 
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
@@ -20,6 +21,7 @@ $brand-black: hsl(0, 0%, 5%);
 $COLORS: (
   'mat-primary': mat-color($primary),
   'mat-accent': mat-color($accent),
+  'mat-warn': mat-color($warn),
   'white': $brand-white,
   'black': $brand-black,
 );
