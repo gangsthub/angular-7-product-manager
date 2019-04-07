@@ -14,8 +14,7 @@ export class FavouritesComponent implements OnInit {
   constructor(private productService: ProductsService) {}
 
   ngOnInit() {
-    this.products = this.productService
-      .getProducts()
-      .filter((product: Product) => product.favourited);
+    const products = this.productService.getProducts() || [];
+    this.products = products.filter((product: Product) => product.favourited);
   }
 }
