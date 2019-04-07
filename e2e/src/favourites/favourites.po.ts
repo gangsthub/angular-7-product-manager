@@ -1,8 +1,8 @@
 import { browser, by, element } from 'protractor';
 
-export class AppPage {
+export class FavouritesPage {
   navigateTo() {
-    return browser.get(browser.baseUrl) as Promise<any>;
+    return browser.get(browser.baseUrl + '/favourites') as Promise<any>;
   }
 
   getTitleText() {
