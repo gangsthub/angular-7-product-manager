@@ -37,7 +37,8 @@ import { OrderOptionsType } from '../models/OrderOptions.model';
 export class ProductListComponent implements OnInit {
   @Input() products: Product[] = [];
   @Input() orderBy: OrderOptionsType;
-  @Input() searchParam: string;
+  @Input() searchEnabled = true;
+  @Input() filterBy: string;
 
   // will always be a shallow copy from original cached products (on client side)
   displayedProducts: Product[] = [];
@@ -45,22 +46,35 @@ export class ProductListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    if (this.orderBy) {
-      this.changeOrder(this.orderBy);
-    } else {
-      this.displayedProducts = [...this.products];
+    if (!this.searchEnabled) {
+      if (this.orderBy) {
+        this.changeOrder(this.orderBy);
+      } else {
+        const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+        this.displayedProducts = filteredProducts;
+      }
     }
   }
 
-  ngOnChanges({ orderBy }: { orderBy: SimpleChange }) {
-    if (orderBy.currentValue) {
+  ngOnChanges({
+    orderBy,
+    filterBy
+  }: {
+    orderBy: SimpleChange;
+    filterBy: SimpleChange;
+  }) {
+    if (filterBy && filterBy.currentValue) {
+      const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+      this.displayedProducts = filteredProducts;
+    }
+    if (orderBy && orderBy.currentValue) {
       this.changeOrder(orderBy.currentValue);
-    } else if (!orderBy.currentValue && orderBy.previousValue) {
+    } else if (orderBy && !orderBy.currentValue && orderBy.previousValue) {
       this.resetOrder();
     }
   }
 
-  changeOrder(type: OrderOptionsType) {
+  private changeOrder(type: OrderOptionsType) {
     if (!type) {
       return;
     }
@@ -79,7 +93,8 @@ export class ProductListComponent implements OnInit {
   }
 
   private sortCollectionByStringProp(prop: keyof Product): Product[] {
-    const productsCopy = [...this.products].sort((prev, next) => {
+    const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+    const productsCopy = filteredProducts.sort((prev, next) => {
       if (typeof prev[prop] !== 'string') {
         return;
       }
@@ -89,7 +104,8 @@ export class ProductListComponent implements OnInit {
   }
 
   private sortCollectionByNumberProp(numberProp: keyof Product): Product[] {
-    const productsCopy = [...this.products].sort((prev, next) => {
+    const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+    const productsCopy = filteredProducts.sort((prev, next) => {
       if (isNaN(Number(prev[numberProp]))) {
         return;
       }
@@ -99,6 +115,22 @@ export class ProductListComponent implements OnInit {
   }
 
   private resetOrder() {
-    this.displayedProducts = [...this.products];
+    const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+    this.displayedProducts = filteredProducts;
+  }
+
+  // normally this should be done in backend
+  private getFilteredProductsCopyIfEnabled(): Product[] {
+    if (!this.searchEnabled) {
+      return [...this.products];
+    }
+    return [...this.products].filter((product: Product) => {
+      const propsToLookUp = Object.values(product).filter(
+        value => typeof value === 'string'
+      );
+      return !!propsToLookUp.find(
+        string => string.toLowerCase().indexOf(this.filterBy.toLowerCase()) > -1
+      );
+    });
   }
 }

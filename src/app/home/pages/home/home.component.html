@@ -6,7 +6,9 @@
   ></app-filters-toolbar>
   <app-product-list
     *ngIf="searchParam"
+    [searchEnabled]="true"
     [products]="products"
     [orderBy]="orderSelected"
+    [filterBy]="searchParam"
   ></app-product-list>
 </div>

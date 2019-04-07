@@ -53,6 +53,7 @@ export class FiltersToolbarComponent implements OnInit, OnDestroy {
     this.searchSubscription = this.searchValue
       .pipe(debounceTime(400))
       .subscribe((value: string) => {
+        // normally this would set up queryParams on the URL...
         this.searchChange.emit(value);
       });
   }

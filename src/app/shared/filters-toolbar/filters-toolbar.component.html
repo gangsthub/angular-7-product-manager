@@ -16,7 +16,7 @@
       <mat-form-field appearance="fill" class="ibm w100p">
         <mat-icon matPrefix class="ibm mr-3">filter_list</mat-icon>
         <mat-label>Order by:</mat-label>
-        <mat-select (selectionChange)="emitChange($event)">
+        <mat-select (selectionChange)="emitSortingChange($event)">
           <mat-option>None</mat-option>
           <mat-option
             *ngFor="let orderOption of orderOptions"
