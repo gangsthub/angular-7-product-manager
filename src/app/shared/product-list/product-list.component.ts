@@ -24,12 +24,12 @@ import { OrderOptionsType } from '../models/OrderOptions.model';
     ]),
     trigger('items', [
       transition(':enter', [
-        style({ transform: 'scale(0.5)', opacity: 0 }), // initial
+        style({ transform: 'scale(0.5)', opacity: 0 }),
         animate(
           // http://cubic-bezier.com/#.12,.47,.44,1
           '.5s cubic-bezier(.12,.47,.44,1)',
           style({ transform: 'scale(1)', opacity: 1 })
-        ) // final
+        )
       ])
     ])
   ]
@@ -50,7 +50,7 @@ export class ProductListComponent implements OnInit {
       if (this.orderBy) {
         this.changeOrder(this.orderBy);
       } else {
-        const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+        const filteredProducts = this.filterBySearch();
         this.displayedProducts = filteredProducts;
       }
     }
@@ -63,8 +63,8 @@ export class ProductListComponent implements OnInit {
     orderBy: SimpleChange;
     filterBy: SimpleChange;
   }) {
-    if (filterBy && filterBy.currentValue) {
-      const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+    if (this.searchEnabled && filterBy && filterBy.currentValue) {
+      const filteredProducts = this.filterBySearch();
       this.displayedProducts = filteredProducts;
     }
     if (orderBy && orderBy.currentValue) {
@@ -93,7 +93,7 @@ export class ProductListComponent implements OnInit {
   }
 
   private sortCollectionByStringProp(prop: keyof Product): Product[] {
-    const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+    const filteredProducts = this.filterBySearch();
     const productsCopy = filteredProducts.sort((prev, next) => {
       if (typeof prev[prop] !== 'string') {
         return;
@@ -104,7 +104,7 @@ export class ProductListComponent implements OnInit {
   }
 
   private sortCollectionByNumberProp(numberProp: keyof Product): Product[] {
-    const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+    const filteredProducts = this.filterBySearch();
     const productsCopy = filteredProducts.sort((prev, next) => {
       if (isNaN(Number(prev[numberProp]))) {
         return;
@@ -115,12 +115,12 @@ export class ProductListComponent implements OnInit {
   }
 
   private resetOrder() {
-    const filteredProducts = this.getFilteredProductsCopyIfEnabled();
+    const filteredProducts = this.filterBySearch();
     this.displayedProducts = filteredProducts;
   }
 
   // normally this should be done in backend
-  private getFilteredProductsCopyIfEnabled(): Product[] {
+  private filterBySearch(): Product[] {
     if (!this.searchEnabled) {
       return [...this.products];
     }

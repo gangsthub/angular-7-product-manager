@@ -11,6 +11,7 @@ import { OrderOptionsType } from '@app/shared/models/OrderOptions.model';
 export class HomeComponent implements OnInit {
   products: Product[] = [];
   orderSelected: OrderOptionsType;
+  searchParam: string;
 
   constructor(private productService: ProductsService) {}
 
